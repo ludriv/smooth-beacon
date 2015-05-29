@@ -1,9 +1,11 @@
-package co.ludriv.smoothbeacon;
+package co.ludriv.smoothbeacon.sample;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import co.ludriv.smoothbeacon.R;
 
 
 public class SampleActivity extends ActionBarActivity {
