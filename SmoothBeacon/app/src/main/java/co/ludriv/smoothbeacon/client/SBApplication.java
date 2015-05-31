@@ -43,11 +43,13 @@ public class SBApplication extends Application implements BeaconConsumer {
             @Override
             public void didEnterRegion(Region region) {
                 Log.d(TAG, String.format("Did enter in region: %s", region));
+                SBMonitorHandler.handleEnterInRegion(context, region);
             }
 
             @Override
             public void didExitRegion(Region region) {
                 Log.d(TAG, String.format("Did exit from region: %s", region));
+                SBMonitorHandler.handleExitRegion(context, region);
             }
 
             @Override

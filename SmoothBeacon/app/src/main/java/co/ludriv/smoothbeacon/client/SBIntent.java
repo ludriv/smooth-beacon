@@ -3,6 +3,7 @@ package co.ludriv.smoothbeacon.client;
 import android.content.Intent;
 
 import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.Region;
 
 import co.ludriv.smoothbeacon.distance.SBProximity;
 
@@ -11,11 +12,28 @@ import co.ludriv.smoothbeacon.distance.SBProximity;
  */
 public final class SBIntent {
 
+    public static final String REGION_KEY = "idk.region";
     public static final String BEACON_KEY = "idk.beacon";
     public static final String FROM_PROXIMITY_KEY = "idk.from_proximity";
     public static final String TO_PROXIMITY_KEY = "idk.to_proximity";
 
+    public static final String ON_ENTER_REGION_ACTION = "co.ludriv.smoothbeacon.action.enter_region";
+    public static final String ON_EXIT_REGION_ACTION = "co.ludriv.smoothbeacon.action.exit_region";
+
     public static final String ON_CHANGE_PROXIMITY_ACTION = "co.ludriv.smoothbeacon.action.change_proximity";
+
+
+    public static final Intent createOnEnterRegionIntent(Region forRegion) {
+        Intent intent = new Intent(ON_ENTER_REGION_ACTION);
+        intent.putExtra(REGION_KEY, forRegion);
+        return intent;
+    }
+
+    public static final Intent createOnExitRegionIntent(Region forRegion) {
+        Intent intent = new Intent(ON_EXIT_REGION_ACTION);
+        intent.putExtra(REGION_KEY, forRegion);
+        return intent;
+    }
 
     public static final Intent createOnChangeProximityIntent(Beacon forBeacon, SBProximity from, SBProximity to) {
         Intent intent = new Intent(ON_CHANGE_PROXIMITY_ACTION);
