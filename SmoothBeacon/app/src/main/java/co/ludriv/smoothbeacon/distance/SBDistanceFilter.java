@@ -5,6 +5,8 @@ import org.altbeacon.beacon.Beacon;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import co.ludriv.smoothbeacon.utility.SBBeaconUtility;
+
 /**
  * Created by Ludovic on 29/05/15.
  */
@@ -28,7 +30,7 @@ public class SBDistanceFilter {
     }
 
     public void put(Beacon beacon, Integer proximityValue) {
-        String refId = getKeyForBeacon(beacon);
+        String refId = SBBeaconUtility.getUniqueIDForBeacon(beacon);
 
         if (!mEntries.containsKey(refId)) {
             mEntries.put(refId, new ArrayList<Integer>());
@@ -39,7 +41,7 @@ public class SBDistanceFilter {
         }
     }
 
-    public SBProximity getSmoothDistance(String refId) {
+    public SBProximity getSmoothProximity(String refId) {
 
         float unknownCount = 0, farCount = 0, nearCount = 0, immediateCount = 0;
         float coeff = 1;
@@ -71,8 +73,4 @@ public class SBDistanceFilter {
         return SBProximity.UNKNOWN;
     }
 
-    private static final String getKeyForBeacon(Beacon beacon) {
-        return String.format("%s#%d#%d",
-                beacon.getId1().toUuidString(), beacon.getId2().toInt(), beacon.getId3().toInt());
-    }
 }

@@ -1,6 +1,7 @@
 package co.ludriv.smoothbeacon.client;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import org.altbeacon.beacon.Beacon;
@@ -37,6 +38,7 @@ public class SBApplication extends Application implements BeaconConsumer {
 
     @Override
     public void onBeaconServiceConnect() {
+        final Context context = this;
         mBeaconManager.setMonitorNotifier(new MonitorNotifier() {
             @Override
             public void didEnterRegion(Region region) {
@@ -58,6 +60,7 @@ public class SBApplication extends Application implements BeaconConsumer {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
                 Log.d(TAG, String.format("Did range %d beacons in region: %s", beacons.size(), region));
+                SBRangeHandler.handleRangeBeacons(context, beacons);
             }
         });
     }
