@@ -1,6 +1,7 @@
 package co.ludriv.smoothbeacon.client;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.Region;
@@ -43,4 +44,11 @@ public final class SBIntent {
         return intent;
     }
 
+    public static final IntentFilter getSBIntentFilter() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ON_ENTER_REGION_ACTION);
+        intentFilter.addAction(ON_EXIT_REGION_ACTION);
+        intentFilter.addAction(ON_CHANGE_PROXIMITY_ACTION);
+        return intentFilter;
+    }
 }
